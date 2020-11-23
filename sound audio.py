@@ -27,13 +27,6 @@ def peakLocation(indata):
   sd.play(indata,fs)
 
   #scaled = np.int32(indata / np.max(np.abs(indata)) * 32767)
-  print(indata)
-
-  write('button1.wav', fs, indata)
-  filename = 'button1.wav'
-  wave_obj = sa.WaveObject.from_wave_file(filename)
-  play_obj = wave_obj.play()
-  play_obj.wait_done()
 
   plt.subplot(2, 1, 1)
   plt.xlabel('Freq (Hz)')
@@ -43,4 +36,8 @@ def peakLocation(indata):
   plt.show()
 
 with sd.InputStream(channels=2, callback=callback, samplerate = fs):
-    sd.sleep(1000*duration)
+    recordning = 0
+    while recordning < 100:
+      sd.sleep(1000*duration)
+      recordning += 1
+      print("Recording!")
